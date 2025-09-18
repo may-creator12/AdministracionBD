@@ -1,1 +1,133 @@
+able producto 
+{
+id_producto char(6) [pk]
+descripcion varchar (100)
+precio_venta decimal [not null]
+stock_minimo integer [not null]
+stock_maximo integer
+cod_categoria char (6) 
+id_sede int
+}
+
+table categoria 
+{
+  cod_categoria char(6)
+  nombre varchar (30)
+}
+ 
+table cliente
+{
+  id_cliente char (10) [pk]
+  nombres varchar (50)
+  apellidos varchar (50)
+  direccion char(100)
+  fono varchar(5)
+  email varchar(100)
+  id_direccion_cliente char (100)
+
+
+}
+
+table direccion
+{
+  id_direccion char(100) [pk] 
+  departamento varchar(100)
+  provincia varchar(100)
+  distrito  varchar(100)
+  detalle_direccion varchar(100)
+  Referencia varchar(50)
+
+}
+table sede 
+{
+id_sede int [pk]
+nombre varchar(100)
+telefono char(11)
+email varchar(100)
+fecha_apertura date
+direccion char(100)
+
+}
+
+table cargos 
+{
+  cod_cargo char(50) [pk]
+  nombre_cargo varchar(100)
+
+}
+
+ table empleado 
+ {
+  cod_empleado char(10) [pk]
+  nombres varchar(100)
+  apellidos varchar (100)
+  dni_emple char(8)
+  nivel_educa varchar(100)
+  fono varchar(11)
+  email varchar(100)
+  sueldo_basico money 
+  fecha_ingreso date
+
+  id_direccion char(100) 
+  cod_cargo chR (50)
+  id_sede int
+  
+
+ }
+
+ table boleta
+ {
+  num_boleta char(100) [pk]
+  fecha_email date(100)
+  id_cliente char(10)
+  cod_empledo char(10)
+  estado_boleta varchar (100)
+ }
+
+ table detalle_boleta
+ {
+  num_boleta char(100) 
+  id_producto char(6)
+  cantidad varchar(100)
+  importe varchar(50)
+  IGV money
+
+ }
+
+ table direccion_cliente 
+ {
+ id_direccion_cliente char(100) [pk]
+ id_cliente char (100)
+ id_direccion char(100)
+
+
+ }
+
+
+
+Ref: "categoria"."cod_categoria" < "producto"."cod_categoria"
+
+Ref: "producto"."id_producto" < "detalle_boleta"."id_producto"
+
+Ref: "cliente"."id_cliente" < "boleta"."id_cliente"
+
+Ref: "direccion_cliente"."id_direccion_cliente" < "cliente"."id_direccion_cliente"
+
+Ref: "cargos"."cod_cargo" < "empleado"."cod_cargo"
+
+Ref: "direccion"."id_direccion" < "empleado"."id_direccion"
+
+
+
+Ref: "direccion"."detalle_direccion" < "direccion_cliente"."id_direccion"
+
+Ref: "sede"."id_sede" < "empleado"."id_sede"
+
+
+
+Ref: "sede"."id_sede" < "producto"."id_sede"
+
+Ref: "empleado"."cod_empleado" < "boleta"."cod_empledo"
+
+Ref: "boleta"."num_boleta" < "detalle_boleta"."num_boleta"
 
