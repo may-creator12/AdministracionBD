@@ -1,4 +1,4 @@
-able producto 
+Table producto 
 {
 id_producto char(6) [pk]
 descripcion varchar (100)
